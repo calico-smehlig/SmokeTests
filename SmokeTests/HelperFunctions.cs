@@ -75,7 +75,7 @@ namespace SmokeTests
         static public void CloseReport()
         {
             int testCaseTotal = testCasePass + testCaseFail;
-            double percentPass = (double)testCasePass / (double)testCaseTotal;
+            double percentPass = (double)testCasePass / testCaseTotal;
             double percentFail = (double)testCaseFail / testCaseTotal;
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.PercentDecimalDigits = 0;
