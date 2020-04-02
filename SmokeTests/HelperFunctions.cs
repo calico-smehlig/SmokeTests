@@ -75,8 +75,8 @@ namespace SmokeTests
         static public void CloseReport()
         {
             int testCaseTotal = testCasePass + testCaseFail;
-            double percentPass = testCasePass / testCaseTotal;
-            double percentFail = testCaseFail / testCaseTotal;
+            double percentPass = (double)testCasePass / (double)testCaseTotal;
+            double percentFail = (double)testCaseFail / testCaseTotal;
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.PercentDecimalDigits = 0;
 
@@ -106,8 +106,8 @@ namespace SmokeTests
                 file.WriteLine("   <B>Test Started:</B> " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + "<BR>");
                 file.WriteLine("   <B>Test Ended:</B> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "<BR>");
                 file.WriteLine("   <B>Tests Ran:</B> " + testCaseTotal + "<BR>");
-                file.WriteLine("   <B>Tests Passed:</B> " + testCasePass + "<BR>");
-                file.WriteLine("   <B>Tests Failed:</B> " + testCaseFail + "<BR>");
+                file.WriteLine("   <B>Tests Passed:</B> " + testCasePass + "  (" + percentPass.ToString("P", nfi) + ")<BR>");
+                file.WriteLine("   <B>Tests Failed:</B> " + testCaseFail + "  (" + percentFail.ToString("P", nfi) + ")<BR>");
                 file.WriteLine("   <HR>");
 
                 file.WriteLine("<B>Test Cases:</B><BR>");
