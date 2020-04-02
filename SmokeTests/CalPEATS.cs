@@ -175,7 +175,7 @@ namespace SmokeTests
             element = browser.FindElement(By.Id("userDropdownMenu"));
              //   report
             stepResult = element.Text == "Humboldt, CaliCoAdmin (Humboldt)";
-            Helper.TestStepCompare(stepNumber, stepName, "Humboldt, CaliCoAdmin (Humboldt) ",element.Text);
+            Helper.TestStepCompare(stepNumber, stepName, "Humboldt, CaliCoAdmin (Humboldt)",element.Text);
             if (!stepResult) testResult = false;
 
 
