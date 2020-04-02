@@ -22,7 +22,7 @@ namespace SmokeTests
         private string testId;
         private string testTitle;
 
-        [TestMethod]
+        [TestMethod, TestCategory("CalPEATS")]
         public void TestLoginPage()
         {
             testId = "1.1.1";
@@ -93,7 +93,7 @@ namespace SmokeTests
             Helper.TestCaseResult(testId, testTitle, testResult);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("CalPEATS")]
         public void TestDashboard()
         {
             testId    = "1.1.2";
