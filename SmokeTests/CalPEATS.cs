@@ -90,22 +90,25 @@ namespace SmokeTests
 
 
             // finish up this test case
+            // ------------------------
             Helper.TestCaseResult(testId, testTitle, testResult);
+            // fail this test case if testResult has been set to FALSE
+            Assert.IsTrue(testResult);
         }
 
         [TestMethod, TestCategory("CalPEATS")]
         public void TestDashboard()
         {
-            testId    = "1.1.2";
+            testId = "1.1.2";
             testTitle = "CalPEATS Dashboard";
 
-            int    stepNumber = 0;
-            string stepName   = "";
-            bool   stepResult = true;
+            int stepNumber = 0;
+            string stepName = "";
+            bool stepResult = true;
 
             bool testResult = true;
 
- 
+
             // STEP: open browser and navigate to login page
             // ---------------------------------------
             //   prep
@@ -173,9 +176,9 @@ namespace SmokeTests
             stepResult = true;
             //   verify
             element = browser.FindElement(By.Id("userDropdownMenu"));
-             //   report
+            //   report
             stepResult = element.Text == "Humboldt, CaliCoAdmin (Humboldt)";
-            Helper.TestStepCompare(stepNumber, stepName, "Humboldt, CaliCoAdmin (Humboldt)",element.Text);
+            Helper.TestStepCompare(stepNumber, stepName, "Humboldt, CaliCoAdmin (Humboldt)", element.Text);
             if (!stepResult) testResult = false;
 
 
@@ -208,8 +211,10 @@ namespace SmokeTests
             if (!stepResult) testResult = false;
 
             // finish up this test case
-            Helper.TestCaseResult(testId, testTitle,testResult);
-
+            // ------------------------
+            Helper.TestCaseResult(testId, testTitle, testResult);
+            // fail this test case if testResult has been set to FALSE
+            Assert.IsTrue(testResult);
         }
 
 
@@ -236,7 +241,7 @@ namespace SmokeTests
         public void MyTestCleanup()
         {
             browser.Quit();
-            browser.Close();
+            // browser.Close();
         }
 
     }
