@@ -11,7 +11,6 @@ namespace SmokeTests
 {
     class Helper
     {
-        static string baseDir;
         static DirectoryInfo testDir;
 
         static string txtFileName;
@@ -80,11 +79,11 @@ namespace SmokeTests
             {
                 file.WriteLine("" + testSuiteId + ": " + testSuiteName);
                 file.WriteLine("");
-                file.WriteLine("Test Started: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ". ");
-                file.WriteLine("Test Ended  : " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + ". ");
-                file.WriteLine("Tests Ran   : " + testCaseTotal + ". ");
-                file.WriteLine("Tests Passed: " + testCasePass + ". ");
-                file.WriteLine("Tests Failed: " + testCaseFail + ". ");
+                file.WriteLine("Test Started: " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + ". ");
+                file.WriteLine("Test Ended  : " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ". ");
+                file.WriteLine("Tests Ran   : " + testCaseTotal + " ");
+                file.WriteLine("Tests Passed: " + testCasePass + " ");
+                file.WriteLine("Tests Failed: " + testCaseFail + " ");
                 file.WriteLine("=================================================");
 
                 file.WriteLine("Test Cases:");
@@ -101,9 +100,9 @@ namespace SmokeTests
                 file.WriteLine("  <H1>" + testSuiteId + ": " + testSuiteName + "</H1>");
                 file.WriteLine("   <B>Test Started:</B> " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + "<BR>");
                 file.WriteLine("   <B>Test Ended:</B> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "<BR>");
-                file.WriteLine("   <B>Tests Ran:</B> " + testCaseTotal + ".<BR>");
-                file.WriteLine("   <B>Tests Passed:</B> " + testCasePass + ".<BR>");
-                file.WriteLine("   <B>Tests Failed:</B> " + testCaseFail + ".<BR>");
+                file.WriteLine("   <B>Tests Ran:</B> " + testCaseTotal + "<BR>");
+                file.WriteLine("   <B>Tests Passed:</B> " + testCasePass + "<BR>");
+                file.WriteLine("   <B>Tests Failed:</B> " + testCaseFail + "<BR>");
                 file.WriteLine("   <HR>");
 
                 file.WriteLine("<B>Test Cases:</B><BR>");
