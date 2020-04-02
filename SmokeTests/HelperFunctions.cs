@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -74,16 +75,20 @@ namespace SmokeTests
         static public void CloseReport()
         {
             int testCaseTotal = testCasePass + testCaseFail;
+            double percentPass = testCasePass / testCaseTotal;
+            double percentFail = testCaseFail / testCaseTotal;
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.PercentDecimalDigits = 0;
 
             using (StreamWriter file = new StreamWriter(txtFileName, true))
             {
                 file.WriteLine("" + testSuiteId + ": " + testSuiteName);
                 file.WriteLine("");
-                file.WriteLine("Test Started: " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + ". ");
-                file.WriteLine("Test Ended  : " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ". ");
+                file.WriteLine("Test Started: " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + " ");
+                file.WriteLine("Test Ended  : " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " ");
                 file.WriteLine("Tests Ran   : " + testCaseTotal + " ");
-                file.WriteLine("Tests Passed: " + testCasePass + " ");
-                file.WriteLine("Tests Failed: " + testCaseFail + " ");
+                file.WriteLine("Tests Passed: " + testCasePass + " (" + percentPass.ToString("P",nfi) + ")");
+                file.WriteLine("Tests Failed: " + testCaseFail + " (" + percentFail.ToString("P",nfi) + ")");
                 file.WriteLine("=================================================");
 
                 file.WriteLine("Test Cases:");
