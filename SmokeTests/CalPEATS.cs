@@ -22,7 +22,7 @@ namespace SmokeTests
         private string testId;
         private string testTitle;
 
-        [TestMethod, TestCategory("CalPEATS")]
+        [TestMethod(), TestCategory("CalPEATS")]
         public void TestLoginPage()
         {
             testId = "1.1.1";

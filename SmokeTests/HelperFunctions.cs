@@ -11,7 +11,7 @@ namespace SmokeTests
 {
     class Helper
     {
-        static readonly private string baseDir = @"c:\\temp\";
+        static string baseDir;
         static DirectoryInfo testDir;
 
         static string txtFileName;
@@ -34,9 +34,17 @@ namespace SmokeTests
 
         static public void InitReport()
         {
-            string subDir = DateTime.Now.ToString("yyyyMMddHHmmss");
-            testDir = Directory.CreateDirectory(Path.Combine(baseDir, subDir));
-
+            // where do we store the test report ?
+            // evaluate WORKSPACE (Jenkins' base directory) 
+            string testDirString = Environment.GetEnvironmentVariable("WORKSPACE");
+            if (testDirString != null)
+            {
+                testDir = new DirectoryInfo(testDirString);
+            }
+            else
+            {
+                 testDir = Directory.CreateDirectory(Path.Combine(@"c:\temp", DateTime.Now.ToString("yyyyMMddHHmmss")));
+            }
             txtFileName  = Path.Combine(testDir.FullName, "00_testlog.txt");
             htmlFileName = Path.Combine(testDir.FullName, "00_testlog.html");
 
@@ -63,7 +71,7 @@ namespace SmokeTests
             testSuiteId = testID;
             testSuiteName = testName;
 
-         }
+          }
         static public void CloseReport()
         {
             int testCaseTotal = testCasePass + testCaseFail;
