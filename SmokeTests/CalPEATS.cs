@@ -165,7 +165,7 @@ namespace SmokeTests
             //   verify
             IWebElement element = browser.FindElement(By.XPath("/html/body/div[1]/div/div[1]/a"));
              //   report
-            stepResult = Helper.TestStepVerify(stepNumber, stepName, "CalPEATS", element.Text);
+            stepResult = Helper.TestStepCompare(stepNumber, stepName, "CalPEATS", element.Text);
             if (!stepResult) testResult = false;
 
 
