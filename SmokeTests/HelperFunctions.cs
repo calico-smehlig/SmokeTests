@@ -161,7 +161,7 @@ namespace SmokeTests
             testStepDetailsHTML = "";
 
         }
-        static public void TestStepCompare(int tsID, string tsName, string expected, string actual)
+        static public bool TestStepCompare(int tsID, string tsName, string expected, string actual)
         {
             bool result = expected == actual;
 
@@ -169,13 +169,13 @@ namespace SmokeTests
             if (expected == actual)
             {
                 testCaseDetailsTXT += "Pass";
-                testCaseDetailsTXT += "\n"; 
+                testCaseDetailsTXT += "\n";
                 testCaseDetailsTXT += "             (checked for string '" + expected + "')";
             }
             else
             {
                 testCaseDetailsTXT += "FAIL";
-                testCaseDetailsTXT += "\n"; 
+                testCaseDetailsTXT += "\n";
                 testCaseDetailsTXT += "             expected: '" + expected + "' - is: '" + actual + "'";
             }
             testCaseDetailsTXT += "\n";
@@ -204,6 +204,52 @@ namespace SmokeTests
             }
             testStepDetailsHTML = "";
 
+            return result;
+        }
+        static public bool TestStepContains(int tsID, string tsName, string expected, string actual)
+        {
+            bool result = actual.Contains(expected);
+
+            testCaseDetailsTXT += String.Format("    Step {0,2}: {1,-60} - ", tsID, tsName);
+            if (expected == actual)
+            {
+                testCaseDetailsTXT += "Pass";
+                testCaseDetailsTXT += "\n"; 
+                testCaseDetailsTXT += "             (checked for substring '" + expected + "')";
+            }
+            else
+            {
+                testCaseDetailsTXT += "FAIL";
+                testCaseDetailsTXT += "\n"; 
+                testCaseDetailsTXT += "             expected: '" + expected + "' is not part of '" + actual + "'";
+            }
+            testCaseDetailsTXT += "\n";
+
+
+
+            testCaseDetailsHTML += "    <b>Step " + tsID + ":</b> " + tsName + " - ";
+            if (result)
+            {
+                testCaseDetailsHTML += "<font color=\"green\">Pass</font>";
+                testCaseDetailsHTML += "<BR>";
+                testCaseDetailsHTML += "<I>(checked for substring '" + expected + "')</I>";
+                testCaseDetailsHTML += "<BR>";
+            }
+            else
+            {
+                testCaseDetailsHTML += "<font color =\"red\">FAIL</font>";
+                testCaseDetailsHTML += "<BR>";
+                testCaseDetailsHTML += "<I> expected: '" + expected + "' - is part of '" + actual + "'</I>";
+                testCaseDetailsHTML += "<BR>";
+            }
+            if (testStepDetailsHTML.Length > 0)
+            {
+                testCaseDetailsHTML += testStepDetailsHTML;
+                testCaseDetailsHTML += "<BR>";
+            }
+            testStepDetailsHTML = "";
+
+            return result;
         }
          static public void TestCaseResult(string tcID, string tcName, bool result)
         {

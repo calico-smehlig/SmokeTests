@@ -146,7 +146,7 @@ namespace SmokeTests
             // ---------------------------------------
             //   prep
             stepNumber++;
-            stepName = "Click login button";
+            stepName = "Click login button - Dashboard appears";
             stepResult = true;
             //   verify
             browser.FindElement(By.XPath("//input[@value='Log in']")).Click();
@@ -164,9 +164,8 @@ namespace SmokeTests
             stepResult = true;
             //   verify
             IWebElement element = browser.FindElement(By.XPath("/html/body/div[1]/div/div[1]/a"));
-            stepResult = element.Text == "CalPEATS";
-            //   report
-            Helper.TestStepResult(stepNumber, stepName, stepResult);
+             //   report
+            stepResult = Helper.TestStepVerify(stepNumber, stepName, "CalPEATS", element.Text);
             if (!stepResult) testResult = false;
 
 
@@ -179,8 +178,7 @@ namespace SmokeTests
             //   verify
             element = browser.FindElement(By.Id("userDropdownMenu"));
             //   report
-            stepResult = element.Text == "Humboldt, CaliCoAdmin (Humboldt)";
-            Helper.TestStepCompare(stepNumber, stepName, "Humboldt, CaliCoAdmin (Humboldt)", element.Text);
+            stepResult = Helper.TestStepCompare(stepNumber, stepName, "Humboldt, CaliCoAdmin (Humboldt)", element.Text);
             if (!stepResult) testResult = false;
 
 
@@ -192,9 +190,8 @@ namespace SmokeTests
             stepResult = true;
             //   verify
             element = browser.FindElement(By.XPath("//*[@id=\"logoutForm\"]/ul/li[2]/a"));
-            stepResult = element.Text == "Log off";
             //   report
-            Helper.TestStepResult(stepNumber, stepName, stepResult);
+            stepResult = Helper.TestStepCompare(stepNumber, stepName, "Log off",element.Text);
             if (!stepResult) testResult = false;
 
 
