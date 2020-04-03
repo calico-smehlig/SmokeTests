@@ -24,7 +24,7 @@ namespace SmokeTests
 
         [TestCategory("CalAgPermits")]
         [TestMethod]
-        public void TestLoginPage()
+        public void TestLoginPage12()
         {
             testId = "1.2.1";
             testTitle = "CalAgPermits Login Page";
@@ -39,12 +39,12 @@ namespace SmokeTests
             // STEP: open browser and navigate to login page
             //   prep
             stepNumber++; 
-            stepName = "Naviage to " + appURL;
+            stepName = "Naviage to " + appURL + " and verify title";
             stepResult = true;
             //   action
             browser.Navigate().GoToUrl(appURL);
             Helper.TakeScreenshot(browser, testId, stepNumber);
-            stepResult = browser.Title == "CalAgPermits";
+            stepResult = browser.Title.Contains("CalAgPermits");
             //   report
             Helper.TestStepResult(stepNumber, stepName, stepResult);
             if (!stepResult) testResult = false;
@@ -57,7 +57,7 @@ namespace SmokeTests
             stepName = "Verify Username textbox is present";
             stepResult = true;
             //   verify
-            IWebElement element = browser.FindElement(By.Id("UserName"));
+            IWebElement element = browser.FindElement(By.Id("Login1_UserName"));
             stepResult = element.Displayed;
             //   report
             Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -70,7 +70,7 @@ namespace SmokeTests
             stepName = "Verify Password textbox is present";
             stepResult = true;
             //   verify
-            element = browser.FindElement(By.Id("Password"));
+            element = browser.FindElement(By.Id("Login1_Password"));
             stepResult = element.Displayed;
             //   report
             Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -83,7 +83,8 @@ namespace SmokeTests
             stepName = "Verify Login button is present";
             stepResult = true;
             //   verify
-            element = browser.FindElement(By.XPath("//input[@value='Log in']"));
+            // recorded XPath: //*[@id="Login1_LoginButton"]
+            element = browser.FindElement(By.Id("Login1_LoginButton"));
             stepResult = element.Displayed;
             //   report
             Helper.TestStepResult(stepNumber, stepName, stepResult);
