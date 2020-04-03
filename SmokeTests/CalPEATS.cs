@@ -22,7 +22,8 @@ namespace SmokeTests
         private string testId;
         private string testTitle;
 
-        [TestMethod(), TestCategory("CalPEATS")]
+        [TestCategory("CalPEATS")]
+        [TestMethod]
         public void TestLoginPage()
         {
             testId = "1.1.1";
@@ -96,7 +97,8 @@ namespace SmokeTests
             Assert.IsTrue(testResult);
         }
 
-        [TestMethod, TestCategory("CalPEATS")]
+        [TestCategory("CalPEATS")]
+        [TestMethod]
         public void TestDashboard()
         {
             testId = "1.1.2";
