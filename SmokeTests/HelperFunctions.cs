@@ -110,7 +110,7 @@ namespace SmokeTests
                 file.WriteLine(" <BODY>");
                 file.WriteLine("  <H1>" + testSuiteId + ": " + testSuiteName + "</H1>");
                 file.WriteLine("   <B>Test Started:</B> " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + "<BR>");
-                file.WriteLine("   <B>Duration:</B>" + tsMin.ToString("d") + ":" + tsSec.ToString("d2") + "");
+                file.WriteLine("   <B>Duration:</B> " + tsMin.ToString("d") + ":" + tsSec.ToString("d2") + " min.<BR>");
                 file.WriteLine("   <B>Tests Ran:</B> " + testCaseTotal + "<BR>");
                 file.WriteLine("   <B>Tests Passed:</B> " + testCasePass + "  (" + percentPass.ToString("P", nfi) + ")<BR>");
                 file.WriteLine("   <B>Tests Failed:</B> " + testCaseFail + "  (" + percentFail.ToString("P", nfi) + ")<BR>");
@@ -270,8 +270,9 @@ namespace SmokeTests
         static public void TestStepComment(string tsComment)
         {
             testStepDetailsTXT += tsComment + "\n";
-            testCaseDetailsHTML += tsComment;
-            testCaseDetailsHTML += "<BR>\n";
+            testStepDetailsHTML += tsComment;
+            testStepDetailsHTML += "<BR>\n";
+            testStepDetailsHTML += "<BR>\n";
         }
         static public void TestCaseResult(string tcID, string tcName, bool result)
         {
