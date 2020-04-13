@@ -14,7 +14,7 @@ namespace SmokeTests
         private IWebDriver browser;
         private string appURL;
 
-        static string suiteId = "1.2";
+        static string suiteId = "2.1";
         static string suiteTitle = "CalAgPermits Smoke Tests";
 
         // the following variables are expected to
@@ -26,7 +26,7 @@ namespace SmokeTests
         [TestMethod]
         public void TestLoginPage12()
         {
-            testId = "1.2.1";
+            testId = "2.1.1";
             testTitle = "CalAgPermits Login Page";
 
             int stepNumber = 0;

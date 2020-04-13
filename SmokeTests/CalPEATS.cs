@@ -13,8 +13,9 @@ namespace SmokeTests
     {
         private IWebDriver browser;
         private string appURL;
+        private string apiURL;
 
-        static string suiteId = "1.1";
+        static string suiteId = "1.";
         static string suiteTitle = "CalPEATS Smoke Tests";
 
         // the following variables are expected to
@@ -314,6 +315,199 @@ namespace SmokeTests
         }
 
 
+        [TestCategory("CalPEATS")]
+        [TestMethod]
+        public void TestAccela1()
+        {
+            testId = "1.2.1";
+            testTitle = "CalPEATS Accela API 1";
+
+            int stepNumber = 0;
+            string stepName = "";
+            bool stepResult = true;
+
+            bool testResult = true;
+            bool testAbort = false;
+
+            IWebElement webElement;
+
+            try
+            {
+
+                // STEP: open browser and navigate to api page
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Naviage to " + apiURL;
+                    stepResult = true;
+                    //   action
+                    browser.Navigate().GoToUrl(apiURL);
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    stepResult = browser.Title == "Test Accela Data Exchange";
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
+
+                // STEP: click the 'Test Me!' button w/o any parameters
+                // -----------------------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click the Test Me button";
+                    stepResult = true;
+                    // action
+                    // Click Me/html/body/form[1]/input[1]
+                    webElement = browser.FindElement(By.XPath("//input[@value='Test Me!']"));
+                    webElement.Click();
+                    //   verify
+
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+                // STEP: take data content and check for substring: <Inspection
+                // ---------------------------------------
+                string daContent = browser.PageSource;
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify returned data contains: '<Inspection'";
+                    stepResult = true;
+                    //   verify
+                    stepResult = daContent.Contains("<Inspection");
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                stepResult = false;
+                testResult = false;
+                Helper.TakeScreenshot(browser, testId, stepNumber);
+                Helper.TestStepComment(ex.Message);
+                Helper.TestStepResult(stepNumber, stepName, stepResult);
+            }
+
+            // finish up this test case
+            // ------------------------
+            Helper.TestCaseResult(testId, testTitle, testResult);
+            // fail this test case if testResult has been set to FALSE
+            Assert.IsTrue(testResult);
+        }
+        [TestCategory("CalPEATS")]
+        [TestMethod]
+        public void TestAccela2()
+        {
+            testId = "1.2.2";
+            testTitle = "CalPEATS Accela API 2";
+
+            int stepNumber = 0;
+            string stepName = "";
+            bool stepResult = true;
+
+            bool testResult = true;
+            bool testAbort = false;
+
+            IWebElement webElement;
+
+            try
+            {
+
+                // STEP: open browser and navigate to api page
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Naviage to " + apiURL;
+                    stepResult = true;
+                    //   action
+                    browser.Navigate().GoToUrl(apiURL);
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    stepResult = browser.Title == "Test Accela Data Exchange";
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
+
+                // STEP: click the 'Test Me!' button w/o any parameters
+                // -----------------------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click the Test Me button";
+                    stepResult = true;
+                    // action
+                    webElement = browser.FindElement(By.XPath("//input[@value='Me Too!']"));
+                    webElement.Click();
+                    //   verify
+
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+                // STEP: take data content and check for substring: <Inspection
+                // ---------------------------------------
+                string daContent = browser.PageSource;
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify returned data contains: '<Data>Test OK</Data>'";
+                    stepResult = true;
+                    //   verify
+                    stepResult = daContent.Contains("<Data>Test OK</Data>");
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                stepResult = false;
+                testResult = false;
+                Helper.TakeScreenshot(browser, testId, stepNumber);
+                Helper.TestStepComment(ex.Message);
+                Helper.TestStepResult(stepNumber, stepName, stepResult);
+            }
+
+            // finish up this test case
+            // ------------------------
+            Helper.TestCaseResult(testId, testTitle, testResult);
+            // fail this test case if testResult has been set to FALSE
+            Assert.IsTrue(testResult);
+        }
+
+
         [ClassInitialize()]
         public static void SetupClass(TestContext testContext)
         {
@@ -328,7 +522,8 @@ namespace SmokeTests
         [TestInitialize()]
         public void SetupTest()
         {
-            appURL = "http://www.calpeats999.org";
+            appURL = "http://www.calpeats.org";
+            apiURL = "https://data.calpeats.org/accelaTest.html";
 
             browser = new ChromeDriver();
         }
