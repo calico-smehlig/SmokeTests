@@ -111,15 +111,16 @@ namespace SmokeTests
             bool testResult = true;
 
 
-            // STEP: open browser and navigate to login page
-            // ---------------------------------------
-            //   prep
-            stepNumber++;
+            try
+            {
+
+                // STEP: open browser and navigate to login page
+                // ---------------------------------------
+                //   prep
+                stepNumber++;
             stepName = "Naviage to " + appURL;
             stepResult = true;
             //   action
-            try
-            {
                 browser.Navigate().GoToUrl(appURL);
                 Helper.TakeScreenshot(browser, testId, stepNumber);
                 //   verify
@@ -127,15 +128,6 @@ namespace SmokeTests
                 //   report
                 Helper.TestStepResult(stepNumber, stepName, stepResult);
                 if (!stepResult) testResult = false;
-            }
-            catch (Exception ex)
-            {
-                stepResult = false;
-                testResult = false;
-                Helper.TakeScreenshot(browser, testId, stepNumber);
-                Helper.TestStepComment(ex.Message);
-                Helper.TestStepResult(stepNumber, stepName, stepResult);
-            }
 
             // STEP: enter user credentials
             // ---------------------------------------
@@ -218,6 +210,17 @@ namespace SmokeTests
             //   report
             Helper.TestStepResult(stepNumber, stepName, stepResult);
             if (!stepResult) testResult = false;
+
+
+            }
+            catch (Exception ex)
+            {
+                stepResult = false;
+                testResult = false;
+                Helper.TakeScreenshot(browser, testId, stepNumber);
+                Helper.TestStepComment(ex.Message);
+                Helper.TestStepResult(stepNumber, stepName, stepResult);
+            }
 
             // finish up this test case
             // ------------------------

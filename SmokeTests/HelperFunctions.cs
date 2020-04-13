@@ -82,12 +82,14 @@ namespace SmokeTests
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.PercentDecimalDigits = 0;
 
+            TimeSpan ts = DateTime.Now - testSuiteStart;
+
             using (StreamWriter file = new StreamWriter(txtFileName, true))
             {
                 file.WriteLine("" + testSuiteId + ": " + testSuiteName);
                 file.WriteLine("");
                 file.WriteLine("Test Started: " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + " ");
-                file.WriteLine("Test Ended  : " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " ");
+                file.WriteLine("Duration    : {m:0}:{ss:1}", ts.TotalMinutes,ts.Seconds);
                 file.WriteLine("Tests Ran   : " + testCaseTotal + " ");
                 file.WriteLine("Tests Passed: " + testCasePass + " (" + percentPass.ToString("P",nfi) + ")");
                 file.WriteLine("Tests Failed: " + testCaseFail + " (" + percentFail.ToString("P",nfi) + ")");
@@ -106,7 +108,7 @@ namespace SmokeTests
                 file.WriteLine(" <BODY>");
                 file.WriteLine("  <H1>" + testSuiteId + ": " + testSuiteName + "</H1>");
                 file.WriteLine("   <B>Test Started:</B> " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + "<BR>");
-                file.WriteLine("   <B>Test Ended:</B> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "<BR>");
+                file.WriteLine("   <B>Duration:</B> {m:0}:{ss:1}<BR>", ts.TotalMinutes, ts.Seconds);
                 file.WriteLine("   <B>Tests Ran:</B> " + testCaseTotal + "<BR>");
                 file.WriteLine("   <B>Tests Passed:</B> " + testCasePass + "  (" + percentPass.ToString("P", nfi) + ")<BR>");
                 file.WriteLine("   <B>Tests Failed:</B> " + testCaseFail + "  (" + percentFail.ToString("P", nfi) + ")<BR>");
