@@ -464,6 +464,7 @@ namespace SmokeTests
                     //   verify
 
                     //   report
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
@@ -490,6 +491,146 @@ namespace SmokeTests
                         testAbort = true;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                stepResult = false;
+                testResult = false;
+                Helper.TakeScreenshot(browser, testId, stepNumber);
+                Helper.TestStepComment(ex.Message);
+                Helper.TestStepResult(stepNumber, stepName, stepResult);
+            }
+
+            // finish up this test case
+            // ------------------------
+            Helper.TestCaseResult(testId, testTitle, testResult);
+            // fail this test case if testResult has been set to FALSE
+            Assert.IsTrue(testResult);
+        }
+        [TestCategory("CalPEATS")]
+        [TestMethod]
+        public void TestAccela3()
+        {
+            testId = "1.2.3";
+            testTitle = "CalPEATS Accela API Date Range";
+
+            int stepNumber = 0;
+            string stepName = "";
+            bool stepResult = true;
+
+            bool testResult = true;
+            bool testAbort = false;
+
+            IWebElement webElement;
+
+            try
+            {
+
+                // STEP: open browser and navigate to api page
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Naviage to " + apiURL;
+                    stepResult = true;
+                    //   action
+                    browser.Navigate().GoToUrl(apiURL);
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    stepResult = browser.Title == "Test Accela Data Exchange";
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
+
+                // STEP: click the 'Test Me!' button w/o any parameters
+                // -----------------------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "click 'Test Me With Parameters!'";
+                    stepResult = true;
+                    // action
+                    webElement = browser.FindElement(By.Name("startDate"));
+                    webElement.SendKeys("20171001000000");
+                    webElement = browser.FindElement(By.Name("endDate"));
+                    webElement.SendKeys("20171031000000");
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+
+                    webElement = browser.FindElement(By.XPath("//input[@value='Test Me With Parameters!']"));
+                    webElement.Click();
+                    //   verify
+
+                    //   report
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+                // STEP: take data content and check for substring: <AccelaInspectionResponse
+                // ---------------------------------------
+                string daContent = browser.PageSource;
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify returned data contains: '<AccelaInspectionResponse'";
+                    stepResult = true;
+                    //   verify
+                    stepResult = daContent.Contains("AccelaInspectionResponse");
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+                // STEP: take data content and check for substring: <inspections
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify returned data contains: 'inspections'";
+                    stepResult = true;
+                    //   verify
+                    stepResult = daContent.Contains("inspections");
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+                // STEP: take data content and check for substring: <pk_inspection_id
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify returned data contains: 'pk_inspection_id'";
+                    stepResult = true;
+                    //   verify
+                    stepResult = daContent.Contains("pk_inspection_id");
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
             }
             catch (Exception ex)
             {
