@@ -83,13 +83,15 @@ namespace SmokeTests
             nfi.PercentDecimalDigits = 0;
 
             TimeSpan ts = DateTime.Now - testSuiteStart;
+            int tsMin = (int)ts.TotalMinutes;
+            int tsSec = ts.Seconds;
 
             using (StreamWriter file = new StreamWriter(txtFileName, true))
             {
                 file.WriteLine("" + testSuiteId + ": " + testSuiteName);
                 file.WriteLine("");
                 file.WriteLine("Test Started: " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + " ");
-                file.WriteLine("Duration    : {m:0}:{ss:1}", ts.TotalMinutes,ts.Seconds);
+                file.WriteLine("Duration    : " + tsMin.ToString("d") + ":" + tsSec.ToString("d2") + "");
                 file.WriteLine("Tests Ran   : " + testCaseTotal + " ");
                 file.WriteLine("Tests Passed: " + testCasePass + " (" + percentPass.ToString("P",nfi) + ")");
                 file.WriteLine("Tests Failed: " + testCaseFail + " (" + percentFail.ToString("P",nfi) + ")");
@@ -108,7 +110,7 @@ namespace SmokeTests
                 file.WriteLine(" <BODY>");
                 file.WriteLine("  <H1>" + testSuiteId + ": " + testSuiteName + "</H1>");
                 file.WriteLine("   <B>Test Started:</B> " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + "<BR>");
-                file.WriteLine("   <B>Duration:</B> {m:0}:{ss:1}<BR>", ts.TotalMinutes, ts.Seconds);
+                file.WriteLine("   <B>Duration:</B>" + tsMin.ToString("d") + ":" + tsSec.ToString("d2") + "");
                 file.WriteLine("   <B>Tests Ran:</B> " + testCaseTotal + "<BR>");
                 file.WriteLine("   <B>Tests Passed:</B> " + testCasePass + "  (" + percentPass.ToString("P", nfi) + ")<BR>");
                 file.WriteLine("   <B>Tests Failed:</B> " + testCaseFail + "  (" + percentFail.ToString("P", nfi) + ")<BR>");
@@ -150,7 +152,12 @@ namespace SmokeTests
             if (result) testCaseDetailsTXT += "Pass";
             else testCaseDetailsTXT += "FAIL";
             testCaseDetailsTXT += "\n";
-
+            if (testStepDetailsTXT.Length > 0)
+            {
+                testCaseDetailsTXT += testStepDetailsTXT;
+                testCaseDetailsTXT += "\n";
+            }
+            testStepDetailsTXT = "";
 
             testCaseDetailsHTML += "    <b>Step " + tsID + ":</b> " + tsName + " - ";
             if (result) testCaseDetailsHTML += "<font color=\"green\">Pass</font>";
