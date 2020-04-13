@@ -118,14 +118,24 @@ namespace SmokeTests
             stepName = "Naviage to " + appURL;
             stepResult = true;
             //   action
-            browser.Navigate().GoToUrl(appURL);
-            Helper.TakeScreenshot(browser, testId, stepNumber);
-            //   verify
-            stepResult = browser.Title == "CalPeats";
-            //   report
-            Helper.TestStepResult(stepNumber, stepName, stepResult);
-            if (!stepResult) testResult = false;
-
+            try
+            {
+                browser.Navigate().GoToUrl(appURL);
+                Helper.TakeScreenshot(browser, testId, stepNumber);
+                //   verify
+                stepResult = browser.Title == "CalPeats";
+                //   report
+                Helper.TestStepResult(stepNumber, stepName, stepResult);
+                if (!stepResult) testResult = false;
+            }
+            catch (Exception ex)
+            {
+                stepResult = false;
+                testResult = false;
+                Helper.TakeScreenshot(browser, testId, stepNumber);
+                Helper.TestStepComment(ex.Message);
+                Helper.TestStepResult(stepNumber, stepName, stepResult);
+            }
 
             // STEP: enter user credentials
             // ---------------------------------------
@@ -231,7 +241,7 @@ namespace SmokeTests
         [TestInitialize()]
         public void SetupTest()
         {
-            appURL = "http://www.calpeats.org";
+            appURL = "http://www.calpeats999.org";
 
             browser = new ChromeDriver();
         }

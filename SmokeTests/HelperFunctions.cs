@@ -28,6 +28,7 @@ namespace SmokeTests
         static string testSuiteDetailsHTML;
         static string testCaseDetailsTXT;
         static string testCaseDetailsHTML;
+        static string testStepDetailsTXT;
         static string testStepDetailsHTML;
         static int testCasePass;
         static int testCaseFail;
@@ -58,6 +59,7 @@ namespace SmokeTests
             testSuiteDetailsHTML = "";
             testCaseDetailsTXT = "";
             testCaseDetailsHTML = "";
+            testStepDetailsTXT  = "";
             testStepDetailsHTML = "";
             
             testCasePass = 0;
@@ -224,7 +226,12 @@ namespace SmokeTests
                 testCaseDetailsTXT += "             expected: '" + expected + "' is not part of '" + actual + "'";
             }
             testCaseDetailsTXT += "\n";
-
+            if (testStepDetailsTXT.Length > 0)
+            {
+                testCaseDetailsTXT += testStepDetailsTXT;
+                testCaseDetailsTXT += "\n";
+            }
+            testStepDetailsTXT = "";
 
 
             testCaseDetailsHTML += "    <b>Step " + tsID + ":</b> " + tsName + " - ";
@@ -251,7 +258,13 @@ namespace SmokeTests
 
             return result;
         }
-         static public void TestCaseResult(string tcID, string tcName, bool result)
+        static public void TestStepComment(string tsComment)
+        {
+            testStepDetailsTXT += tsComment + "\n";
+            testCaseDetailsHTML += tsComment;
+            testCaseDetailsHTML += "<BR>\n";
+        }
+        static public void TestCaseResult(string tcID, string tcName, bool result)
         {
             testSuiteSummaryTXT += String.Format("{0}: {1,-35} - ", tcID, tcName);
             if (result) testSuiteSummaryTXT += "Pass";
