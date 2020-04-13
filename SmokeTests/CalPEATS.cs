@@ -376,17 +376,17 @@ namespace SmokeTests
                         testAbort = false;
                     }
                 }
-                // STEP: take data content and check for substring: <Inspection
+                // STEP: take data content and check for substring: AccelaInspectionsResponse
                 // ---------------------------------------
                 string daContent = browser.PageSource;
                 if (!testAbort)
                 {
                     //   prep
                     stepNumber++;
-                    stepName = "Verify returned data contains: '<Inspection'";
+                    stepName = "Verify returned data contains: 'AccelaInspectionsResponse'";
                     stepResult = true;
                     //   verify
-                    stepResult = daContent.Contains("<Inspection");
+                    stepResult = daContent.Contains("AccelaInspectionsResponse");
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
@@ -581,10 +581,10 @@ namespace SmokeTests
                 {
                     //   prep
                     stepNumber++;
-                    stepName = "Verify returned data contains: '<AccelaInspectionResponse'";
+                    stepName = "Verify returned data contains: 'AccelaInspectionsResponse'";
                     stepResult = true;
                     //   verify
-                    stepResult = daContent.Contains("AccelaInspectionResponse");
+                    stepResult = daContent.Contains("AccelaInspectionsResponse");
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
