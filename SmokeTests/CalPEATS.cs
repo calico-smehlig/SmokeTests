@@ -34,64 +34,90 @@ namespace SmokeTests
             bool stepResult = true;
 
             bool testResult = true;
+            bool testAbort = false;
 
+            IWebElement webElement;
 
             try
             {
 
                 // STEP: open browser and navigate to login page
-                //   prep
-                stepNumber++;
-                stepName = "Naviage to " + appURL;
-                stepResult = true;
-                //   action
-                browser.Navigate().GoToUrl(appURL);
-                Helper.TakeScreenshot(browser, testId, stepNumber);
-                stepResult = browser.Title == "CalPeats";
-                //   report
-                Helper.TestStepResult(stepNumber, stepName, stepResult);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Naviage to " + appURL;
+                    stepResult = true;
+                    //   action
+                    browser.Navigate().GoToUrl(appURL);
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    stepResult = browser.Title == "CalPeats";
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
 
                 // STEP: check if the user textbox is present
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Verify Username textbox is present";
-                stepResult = true;
-                //   verify
-                IWebElement element = browser.FindElement(By.Id("UserName"));
-                stepResult = element.Displayed;
-                //   report
-                Helper.TestStepResult(stepNumber, stepName, stepResult);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify Username textbox is present";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.Id("UserName"));
+                    stepResult = webElement.Displayed;
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
                 // STEP: check if the password textbox is present
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Verify Password textbox is present";
-                stepResult = true;
-                //   verify
-                element = browser.FindElement(By.Id("Password"));
-                stepResult = element.Displayed;
-                //   report
-                Helper.TestStepResult(stepNumber, stepName, stepResult);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify Password textbox is present";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.Id("Password"));
+                    stepResult = webElement.Displayed;
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
                 // STEP: check if the Login button is present
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Verify Login button is present";
-                stepResult = true;
-                //   verify
-                element = browser.FindElement(By.XPath("//input[@value='Log in']"));
-                stepResult = element.Displayed;
-                //   report
-                Helper.TestStepResult(stepNumber, stepName, stepResult);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify Login button is present";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.XPath("//input[@value='Log in']"));
+                    stepResult = webElement.Displayed;
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -121,108 +147,154 @@ namespace SmokeTests
             bool stepResult = true;
 
             bool testResult = true;
+            bool testAbort = false;
 
+            IWebElement webElement;
 
             try
             {
 
                 // STEP: open browser and navigate to login page
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Naviage to " + appURL;
-                stepResult = true;
-                //   action
-                browser.Navigate().GoToUrl(appURL);
-                Helper.TakeScreenshot(browser, testId, stepNumber);
-                //   verify
-                stepResult = browser.Title == "CalPeats";
-                //   report
-                Helper.TestStepResult(stepNumber, stepName, stepResult);
-                if (!stepResult) testResult = false;
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Naviage to " + appURL;
+                    stepResult = true;
+                    //   action
+                    browser.Navigate().GoToUrl(appURL);
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   verify
+                    stepResult = browser.Title == "CalPeats";
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
 
                 // STEP: enter user credentials
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Enter user credentials";
-                stepResult = true;
-                //   action
-                browser.FindElement(By.Id("UserName")).SendKeys("calicoadmin12");
-                browser.FindElement(By.Id("Password")).SendKeys("CalPEATSRocks!");
-                Helper.TakeScreenshot(browser, testId, stepNumber);
-                //   report
-                Helper.TestStepResult(stepNumber, stepName, stepResult);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Enter user credentials";
+                    stepResult = true;
+                    //   action
+                    browser.FindElement(By.Id("UserName")).SendKeys("calicoadmin12");
+                    browser.FindElement(By.Id("Password")).SendKeys("CalPEATSRocks!");
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
 
                 // STEP: click the Login button
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Click login button - Dashboard appears";
-                stepResult = true;
-                //   verify
-                browser.FindElement(By.XPath("//input[@value='Log in']")).Click();
-                Helper.TakeScreenshot(browser, testId, stepNumber);
-                //   report
-                Helper.TestStepResult(stepNumber, stepName, stepResult);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click login button - Dashboard appears";
+                    stepResult = true;
+                    //   verify
+                    browser.FindElement(By.XPath("//input[@value='Log in']")).Click();
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
 
                 // STEP: check if the CalPEATS logo is present
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Verify CalPEATS logo is present";
-                stepResult = true;
-                //   verify
-                IWebElement element = browser.FindElement(By.XPath("/html/body/div[1]/div/div[1]/a"));
-                //   report
-                stepResult = Helper.TestStepCompare(stepNumber, stepName, "CalPEATS", element.Text);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify CalPEATS logo is present";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.XPath("/html/body/div[1]/div/div[1]/a"));
+                    //   report
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "CalPEATS", webElement.Text);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
 
                 // STEP: check if the name of the logged in person shows correctly
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Verify correct User Name displays";
-                stepResult = true;
-                //   verify
-                element = browser.FindElement(By.Id("userDropdownMenu"));
-                //   report
-                stepResult = Helper.TestStepCompare(stepNumber, stepName, "Humboldt, CaliCoAdmin (Humboldt)", element.Text);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify correct User Name displays";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.Id("userDropdownMenu"));
+                    //   report
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "Humboldt, CaliCoAdmin (Humboldt)", webElement.Text);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
 
                 // STEP: check if the logoff button is present
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Verify Logout button is present";
-                stepResult = true;
-                //   verify
-                element = browser.FindElement(By.XPath("//*[@id=\"logoutForm\"]/ul/li[2]/a"));
-                //   report
-                stepResult = Helper.TestStepCompare(stepNumber, stepName, "Log off", element.Text);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify Logout button is present";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.XPath("//*[@id=\"logoutForm\"]/ul/li[2]/a"));
+                    //   report
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "Log off", webElement.Text);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
 
 
                 // STEP: click the logoff button and verify login screen displays
                 // ---------------------------------------
-                //   prep
-                stepNumber++;
-                stepName = "Click Logout button, verify we're back at Login screen";
-                stepResult = true;
-                //   action
-                element.Click();
-                Helper.TakeScreenshot(browser, testId, stepNumber);
-                //   report
-                Helper.TestStepResult(stepNumber, stepName, stepResult);
-                if (!stepResult) testResult = false;
-
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click Logout button, verify we're back at Login screen";
+                    stepResult = true;
+                    //   action
+                    webElement = browser.FindElement(By.XPath("//*[@id=\"logoutForm\"]/ul/li[2]/a")); 
+                    webElement.Click();
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
 
             }
             catch (Exception ex)
