@@ -9,25 +9,25 @@ using OpenQA.Selenium.IE;
 namespace SmokeTests
 {
     [TestClass]
-    public class CalAgPermitsTests
+    public class SMCDailyTests
     {
         private IWebDriver browser;
         private string appURL;
 
-        static string suiteId = "2";
-        static string suiteTitle = "CalAgPermits Smoke Tests";
+        static string suiteId = "3";
+        static string suiteTitle = "SMC Daily Smoke Tests";
 
         // the following variables are expected to
         // be set by the test case
         private string testId;
         private string testTitle;
 
-        [TestCategory("CalAgPermits")]
+        [TestCategory("SMCDaily")]
         [TestMethod]
-        public void TestLoginPage12()
+        public void TestLoginPage31()
         {
-            testId = "2.1.1";
-            testTitle = "CalAgPermits Login Page";
+            testId = "3.1.1";
+            testTitle = "SMCDaily Login Page";
 
             int stepNumber = 0;
             string stepName = "";
@@ -49,7 +49,7 @@ namespace SmokeTests
                 browser.Navigate().GoToUrl(appURL);
                 Helper.TakeScreenshot(browser, testId, stepNumber);
                 //   report
-                stepResult = Helper.TestStepContains(stepNumber, stepName, "CalAgPermits", browser.Title);
+                stepResult = Helper.TestStepContains(stepNumber, stepName, "SMC Daily", browser.Title);
                 if (!stepResult)
                 {
                     testResult = false;
@@ -118,6 +118,25 @@ namespace SmokeTests
                 }
             }
 
+            // STEP: check that version number displays and has expected value
+            // ---------------------------------------
+            if (!testAbort)
+            {
+                //   prep
+                stepNumber++;
+                stepName = "Verify Login version string";
+                stepResult = true;
+                //   verify
+                webElement = browser.FindElement(By.Id("VersionLabel"));
+                //   report
+                stepResult = Helper.TestStepCompare(stepNumber, stepName, "7.0-smc", webElement.Text);
+                if (!stepResult)
+                {
+                    testResult = false;
+                    testAbort = false;
+                }
+            }
+
             // finish up this test case
             // ------------------------
             Helper.TestCaseResult(testId, testTitle, testResult);
@@ -141,8 +160,8 @@ namespace SmokeTests
         [TestInitialize()]
         public void SetupTest()
         {
-            appURL = "http://www.calagpermits.org";
-
+            appURL = "http://smcdaily.org";
+            
             browser = new ChromeDriver();
         }
 

@@ -15,7 +15,7 @@ namespace SmokeTests
         private string appURL;
         private string apiURL;
 
-        static string suiteId = "1.";
+        static string suiteId = "1";
         static string suiteTitle = "CalPEATS Smoke Tests";
 
         // the following variables are expected to
