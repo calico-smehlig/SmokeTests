@@ -367,6 +367,8 @@ namespace SmokeTests
                     webElement = browser.FindElement(By.XPath("//input[@value='Test Me!']"));
                     webElement.Click();
                     //   verify
+                    // this takes forever - let's wait 60 seconds otherwise we'll get a timeout error verifying
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
 
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -411,6 +413,7 @@ namespace SmokeTests
             // fail this test case if testResult has been set to FALSE
             Assert.IsTrue(testResult);
         }
+  
         [TestCategory("CalPEATS")]
         [TestMethod]
         public void TestAccela2()
@@ -507,6 +510,7 @@ namespace SmokeTests
             // fail this test case if testResult has been set to FALSE
             Assert.IsTrue(testResult);
         }
+ 
         [TestCategory("CalPEATS")]
         [TestMethod]
         public void TestAccela3()
