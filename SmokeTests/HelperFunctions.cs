@@ -91,7 +91,7 @@ namespace SmokeTests
                 file.WriteLine("" + testSuiteId + ": " + testSuiteName);
                 file.WriteLine("");
                 file.WriteLine("Test Started: " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + " ");
-                file.WriteLine("Duration    : " + tsMin.ToString("d") + ":" + tsSec.ToString("d2") + "");
+                file.WriteLine("Duration    : " + tsMin.ToString("d") + ":" + tsSec.ToString("d2") + " min");
                 file.WriteLine("Tests Ran   : " + testCaseTotal + " ");
                 file.WriteLine("Tests Passed: " + testCasePass + " (" + percentPass.ToString("P",nfi) + ")");
                 file.WriteLine("Tests Failed: " + testCaseFail + " (" + percentFail.ToString("P",nfi) + ")");
@@ -110,7 +110,7 @@ namespace SmokeTests
                 file.WriteLine(" <BODY>");
                 file.WriteLine("  <H1>" + testSuiteId + ": " + testSuiteName + "</H1>");
                 file.WriteLine("   <B>Test Started:</B> " + testSuiteStart.ToString("yyyy-MM-dd HH:mm:ss") + "<BR>");
-                file.WriteLine("   <B>Duration:</B> " + tsMin.ToString("d") + ":" + tsSec.ToString("d2") + " min.<BR>");
+                file.WriteLine("   <B>Duration:</B> " + tsMin.ToString("d") + ":" + tsSec.ToString("d2") + " min<BR>");
                 file.WriteLine("   <B>Tests Ran:</B> " + testCaseTotal + "<BR>");
                 file.WriteLine("   <B>Tests Passed:</B> " + testCasePass + "  (" + percentPass.ToString("P", nfi) + ")<BR>");
                 file.WriteLine("   <B>Tests Failed:</B> " + testCaseFail + "  (" + percentFail.ToString("P", nfi) + ")<BR>");

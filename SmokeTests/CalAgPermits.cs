@@ -49,7 +49,7 @@ namespace SmokeTests
                 browser.Navigate().GoToUrl(appURL);
                 Helper.TakeScreenshot(browser, testId, stepNumber);
                 //   report
-                stepResult = Helper.TestStepContains(stepNumber, stepName, "CalAgPermits", browser.Title);
+                stepResult = Helper.TestStepContains(stepNumber, stepName, "", browser.Title);
                 if (!stepResult)
                 {
                     testResult = false;
