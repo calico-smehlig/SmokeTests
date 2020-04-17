@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gophery.cs" />
     <Compile Include="SMCDaily.cs" />
     <Compile Include="CalAgPermits.cs" />
     <Compile Include="CalPEATS.cs" />
