@@ -269,7 +269,7 @@ namespace SmokeTests
         }
         static public void TestStepComment(string tsComment)
         {
-            testStepDetailsTXT += tsComment + "\n";
+            testStepDetailsTXT += "             " +tsComment + "\n";
             testStepDetailsHTML += tsComment;
             testStepDetailsHTML += "<BR>\n";
             testStepDetailsHTML += "<BR>\n";

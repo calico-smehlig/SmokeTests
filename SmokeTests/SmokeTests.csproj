@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalSchoolNotify.cs" />
     <Compile Include="Gopher.cs" />
     <Compile Include="BeeWhere.cs" />
     <Compile Include="SMCDaily.cs" />
