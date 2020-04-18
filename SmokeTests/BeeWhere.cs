@@ -164,7 +164,7 @@ namespace SmokeTests
         public void TestBeekeeperMainPage()
         {
             testId = "5.2.1";
-            testTitle = "BeeWhere Beekeeper Main Page";
+            testTitle = "BeeWhere County Dashboard";
 
             int stepNumber = 0;
             string stepName = "";
@@ -207,8 +207,8 @@ namespace SmokeTests
                     //   verify
                     webElement = browser.FindElement(By.PartialLinkText("BEEKEEPER MANAGEMENT"));
                     Helper.TestStepComment("Link '" + webElement.Text + "' goes to '" + webElement.GetAttribute("href") + "'.");
-                    //   report
                     stepResult = webElement.Displayed;
+                    //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
@@ -233,9 +233,9 @@ namespace SmokeTests
                     webElement = browser.FindElement(By.PartialLinkText("BEEKEEPER MANAGEMENT"));
                     webElement.Click();
                     //   verify
-                    stepResult = Helper.TestStepContains(stepNumber, stepName, "BeeWhere California", browser.Title);
-                    //   report
                     Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "BeeWhere California", browser.Title);
                     if (!stepResult)
                     {
                         testResult = false;
@@ -274,10 +274,9 @@ namespace SmokeTests
                     stepResult = true;
                     //   verify
                     browser.FindElement(By.XPath("//input[@value='Log in']")).Click();
-                    stepResult = Helper.TestStepContains(stepNumber, stepName, "BeeWhere California | Index", browser.Title);
-                    //   report
                     Helper.TakeScreenshot(browser, testId, stepNumber);
-                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    //   report
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "BeeWhere California | Index", browser.Title);
                     if (!stepResult)
                     {
                         testResult = false;
@@ -319,7 +318,6 @@ namespace SmokeTests
                     webElement = browser.FindElement(By.XPath("//*[@id='logoutForm']/div/div[1]"));
                     //   report
                     stepResult = Helper.TestStepCompare(stepNumber, stepName, "calico51", webElement.Text);
-                    if (!stepResult)
                     {
                         testResult = false;
                         testAbort = false;
@@ -359,9 +357,9 @@ namespace SmokeTests
                     browser.FindElement(By.PartialLinkText("Manage Account")).Click();
                     browser.FindElement(By.PartialLinkText("Log Off")).Click();
                     //   verify
-                    stepResult = Helper.TestStepContains(stepNumber, stepName, "BeeWhere California | Home", browser.Title);
-                    //   report
                     Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "BeeWhere California | Home", browser.Title);
                     if (!stepResult)
                     {
                         testResult = false;
