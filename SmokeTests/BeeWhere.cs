@@ -318,6 +318,7 @@ namespace SmokeTests
                     webElement = browser.FindElement(By.XPath("//*[@id='logoutForm']/div/div[1]"));
                     //   report
                     stepResult = Helper.TestStepCompare(stepNumber, stepName, "calico51", webElement.Text);
+                    if (!stepResult)
                     {
                         testResult = false;
                         testAbort = false;
