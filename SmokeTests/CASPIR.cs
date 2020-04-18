@@ -22,7 +22,7 @@ namespace SmokeTests
         private string testId;
         private string testTitle;
 
-        [TestCategory("CalSchoolNotify")]
+        [TestCategory("CASPIR")]
         [TestMethod]
         public void TestMainPage61()
         {
