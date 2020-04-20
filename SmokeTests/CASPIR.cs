@@ -291,10 +291,6 @@ namespace SmokeTests
                     webElement = browser.FindElement(By.XPath("//button[@value='Log in']"));
                     webElement.Click();
                     Helper.TakeScreenshot(browser, testId, stepNumber);
-                    //   verify
-                    // recorded XPath: //*[@id="Login1_LoginButton"]
-                    webElement = browser.FindElement(By.XPath("//button[@value='Log in']"));
-                    stepResult = webElement.Displayed;
                     //   report
                     stepResult = Helper.TestStepContains(stepNumber, stepName, "Admin Portal - CASPIR", browser.Title);
                     if (!stepResult)
