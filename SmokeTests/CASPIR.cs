@@ -197,7 +197,171 @@ namespace SmokeTests
             Assert.IsTrue(testResult);
         }
 
- 
+        [TestCategory("CASPIR")]
+        [TestMethod]
+        public void TestMainDashboard()
+        {
+            testId = "7.1.2";
+            testTitle = "CASPIR Dashboard";
+
+            int stepNumber = 0;
+            string stepName = "";
+            bool stepResult = true;
+
+            bool testResult = true;
+            bool testAbort = false;
+
+            IWebElement webElement;
+
+            try
+            {
+                // STEP: open browser and navigate to login page
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Naviage to " + appURL + " and verify title";
+                    stepResult = true;
+                    //   action
+                    browser.Navigate().GoToUrl(appURL);
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CASPIR", browser.Title);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
+
+
+                // STEP: click the Login button 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click the Login button";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.XPath("//button[text()='Login']"));
+                    webElement.Click();
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CASPIR Portal", browser.Title);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+                // STEP: Enter user credentials
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Enter User Credentials";
+                    stepResult = true;
+                    //   action
+                    webElement = browser.FindElement(By.Id("Username"));
+                    webElement.SendKeys("calicosol");
+                    webElement = browser.FindElement(By.Id("Password"));
+                    webElement.SendKeys("2Listen.");
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+                // STEP: Click the Login button
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click Login button";
+                    stepResult = true;
+                    // action
+                    webElement = browser.FindElement(By.XPath("//button[@value='Log in']"));
+                    webElement.Click();
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   verify
+                    // recorded XPath: //*[@id="Login1_LoginButton"]
+                    webElement = browser.FindElement(By.XPath("//button[@value='Log in']"));
+                    stepResult = webElement.Displayed;
+                    //   report
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "Admin Portal - CASPIR", browser.Title);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+                // STEP: check title text (h4)
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify header is correct";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.XPath("//h4"));
+                    //   report
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "Incident Reports Pending Assignment", webElement.Text);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+                // STEP: click Log Off link 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click 'Log Off'";
+                    stepResult = true;
+                    //   action
+                    browser.FindElement(By.PartialLinkText("Log off")).Click();
+                    //   verify
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "Home - CASPIR", browser.Title);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                stepResult = false;
+                testResult = false;
+                Helper.TakeScreenshot(browser, testId, stepNumber);
+                Helper.TestStepComment(ex.Message);
+                Helper.TestStepResult(stepNumber, stepName, stepResult);
+            }
+
+            // finish up this test case
+            // ------------------------
+            Helper.TestCaseResult(testId, testTitle, testResult);
+            // fail this test case if testResult has been set to FALSE
+            Assert.IsTrue(testResult);
+        }
+
+
 
         [ClassInitialize()]
         public static void SetupClass(TestContext testContext)
