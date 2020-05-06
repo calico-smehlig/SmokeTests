@@ -217,10 +217,6 @@ namespace SmokeTests
                     }
                 }
 
-
-
-
-
                 // STEP: click on  Access Beekeeper button 
                 // ---------------------------------------
                 if (!testAbort)
@@ -284,7 +280,6 @@ namespace SmokeTests
                     }
                 }
 
-
                 // STEP: check H2 tag
                 // ---------------------------------------
                 if (!testAbort)
@@ -303,7 +298,6 @@ namespace SmokeTests
                         testAbort = false;
                     }
                 }
-
 
                 // STEP: check if the name of the logged in person shows correctly
                 // ---------------------------------------
@@ -367,8 +361,6 @@ namespace SmokeTests
                         testAbort = false;
                     }
                 }
-
-
             }
             catch (Exception ex)
             {
