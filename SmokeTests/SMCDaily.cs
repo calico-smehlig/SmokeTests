@@ -275,7 +275,7 @@ namespace SmokeTests
                     // 
                     webElement = browser.FindElement(By.Id("ctl00_BannerLeft"));
                     //   report
-                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "/images/smccountysealgrn.gif", webElement.GetAttribute("src"));
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "/images/smccountysealgrn.gif", webElement.GetAttribute("src"));
                     if (!stepResult)
                     {
                         testResult = false;
