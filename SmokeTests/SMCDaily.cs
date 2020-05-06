@@ -126,7 +126,7 @@ namespace SmokeTests
                 {
                     //   prep
                     stepNumber++;
-                    stepName = "Verify Login version string";
+                    stepName = "Verify App Version is correct";
                     stepResult = true;
                     //   verify
                     webElement = browser.FindElement(By.Id("VersionLabel"));
@@ -240,7 +240,7 @@ namespace SmokeTests
                 {
                     //   prep
                     stepNumber++;
-                    stepName = "Verify Login button is present";
+                    stepName = "Click Login button";
                     stepResult = true;
                     //   action
                     // recorded XPath: //*[@id="Login1_LoginButton"]
@@ -269,7 +269,7 @@ namespace SmokeTests
                 {
                     //   prep
                     stepNumber++;
-                    stepName = "VerifyCounty Logo displays";
+                    stepName = "Verify County Logo displays";
                     stepResult = true;
                     //   verify
                     // 
@@ -289,7 +289,7 @@ namespace SmokeTests
                 {
                     //   prep
                     stepNumber++;
-                    stepName = "Verify Username displays";
+                    stepName = "Verify User Name is correct";
                     stepResult = true;
                     //   verify
                     webElement = browser.FindElement(By.Id("ctl00_lblFirstName"));
@@ -308,7 +308,7 @@ namespace SmokeTests
                 {
                     //   prep
                     stepNumber++;
-                    stepName = "Verify User Role is correcy";
+                    stepName = "Verify User Role is correct";
                     stepResult = true;
                     //   verify
                     webElement = browser.FindElement(By.Id("ctl00_lblUserRole"));
@@ -327,7 +327,7 @@ namespace SmokeTests
                 {
                     //   prep
                     stepNumber++;
-                    stepName = "Logout";
+                    stepName = "Click Logout link";
                     stepResult = true;
                     //   action
                     webElement = browser.FindElement(By.Id("ctl00_MainMenu1_radMainMenu_m8"));
