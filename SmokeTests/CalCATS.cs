@@ -100,7 +100,7 @@ namespace SmokeTests
                     }
                 }
 
-                // STEP: Click Login button is present
+                // STEP: Click Login button 
                 // ---------------------------------------
                 if (!testAbort)
                 {
@@ -111,6 +111,7 @@ namespace SmokeTests
                     // action
                     webElement = browser.FindElement(By.Id("loginButton"));
                     webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -152,6 +153,7 @@ namespace SmokeTests
                     webElement = browser.FindElement(By.Id("calico-ajax-userid"));
                     stepResult = webElement.Displayed;
                     //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
                         testResult = false;
@@ -171,6 +173,7 @@ namespace SmokeTests
                     webElement = browser.FindElement(By.Id("calico-ajax-password"));
                     stepResult = webElement.Displayed;
                     //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
                         testResult = false;
@@ -190,6 +193,7 @@ namespace SmokeTests
                     webElement = browser.FindElement(By.Id("calico-ajax-login-button"));
                     stepResult = webElement.Displayed;
                     //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
                         testResult = false;
@@ -212,6 +216,7 @@ namespace SmokeTests
                     webElement.Click();
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
                         testResult = false;
