@@ -131,7 +131,13 @@ namespace SmokeTests
                     stepName = "Verify Login dialog displays";
                     stepResult = true;
                     //   verify
-                    webElement = browser.FindElement(By.ClassName("modal-title"));
+                    // copied XPath: //*[@id="calico-ajax-login-modal"]/div/div/div[1]/h4
+                    //IReadOnlyCollection<IWebElement> listOfElements1 = browser.FindElements(By.XPath("//h4"));
+                    //IReadOnlyCollection<IWebElement> listOfElements2 = browser.FindElements(By.XPath("//*[@id='calico-ajax-login-modal']/div/div/div[1]/button"));
+                    IReadOnlyCollection<IWebElement> listOfElements3 = browser.FindElements(By.ClassName("modal-title"));
+                    //IReadOnlyCollection<IWebElement> listOfElements4 = browser.FindElements(By.LinkText("x"));
+
+                    webElement = browser.FindElement(By.XPath("//*[@id='calico-ajax-login-modal']/div/div/div[1]/h4"));
                     stepResult = Helper.TestStepCompare(stepNumber, stepName, "Please Log In", webElement.Text);
                     //   report
                     if (!stepResult)
@@ -219,6 +225,7 @@ namespace SmokeTests
                     // //*[@id="calico-ajax-login-modal"]/div/div/div[1]/button
                     webElement = browser.FindElement(By.XPath("//*[@id='calico-ajax-login-modal']/div/div/div[1]/button"));
                     webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
