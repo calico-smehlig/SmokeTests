@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.IE;
-
+using System.Collections.Generic;
 
 namespace SmokeTests
 {
@@ -111,7 +111,7 @@ namespace SmokeTests
                     // action
                     webElement = browser.FindElement(By.Id("loginButton"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -131,7 +131,7 @@ namespace SmokeTests
                     stepName = "Verify Login dialog displays";
                     stepResult = true;
                     //   verify
-                    webElement = browser.FindElement(By.XPath("//h4"));
+                    webElement = browser.FindElement(By.ClassName("modal-title"));
                     stepResult = Helper.TestStepCompare(stepNumber, stepName, "Please Log In", webElement.Text);
                     //   report
                     if (!stepResult)
@@ -212,7 +212,12 @@ namespace SmokeTests
                     stepName = "Close Login dialog";
                     stepResult = true;
                     //   verify
-                    webElement = browser.FindElement(By.ClassName("close"));
+                    //IReadOnlyCollection<IWebElement> listOfElements1 = browser.FindElements(By.XPath("//h4"));
+                    //IReadOnlyCollection<IWebElement> listOfElements2 = browser.FindElements(By.XPath("//*[@id='calico-ajax-login-modal']/div/div/div[1]/button"));
+                    //IReadOnlyCollection<IWebElement> listOfElements3 = browser.FindElements(By.ClassName("close"));
+                    //IReadOnlyCollection<IWebElement> listOfElements4 = browser.FindElements(By.LinkText("x"));
+                    // //*[@id="calico-ajax-login-modal"]/div/div/div[1]/button
+                    webElement = browser.FindElement(By.XPath("//*[@id='calico-ajax-login-modal']/div/div/div[1]/button"));
                     webElement.Click();
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
