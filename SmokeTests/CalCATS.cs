@@ -252,7 +252,177 @@ namespace SmokeTests
             // fail this test case if testResult has been set to FALSE
             Assert.IsTrue(testResult);
         }
+        [TestCategory("CalCATS")]
+        [TestMethod]
+        public void TestDashboard()
+        {
+            testId = "6.1.2";
+            testTitle = "CalCATS Dashboard";
+
+            int stepNumber = 0;
+            string stepName = "";
+            bool stepResult = true;
+
+            bool testResult = true;
+            bool testAbort = false;
+
+            IWebElement webElement;
+
+            try
+            {
+                // STEP: open browser and navigate to login page
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Naviage to " + appURL + " and verify title";
+                    stepResult = true;
+                    //   action
+                    browser.Navigate().GoToUrl(appURL);
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS Home Page", browser.Title);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
+
+                // STEP: Click Login button 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click Login button";
+                    stepResult = true;
+                    // action
+                    webElement = browser.FindElement(By.Id("loginButton"));
+                    webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+                // STEP: enter User Credentials
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Enter User Credentials";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.Id("calico-ajax-userid"));
+                    webElement.SendKeys("calico45@calicosol.com");
+                    webElement = browser.FindElement(By.Id("calico-ajax-password"));
+                    webElement.SendKeys("2kegs");
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
  
+                // STEP: click Login button 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click 'Sign In' Button";
+                    stepResult = true;
+                    //   action
+                    webElement = browser.FindElement(By.Id("calico-ajax-login-button"));
+                    webElement.Click();
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    // verify
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS - Dashboard", browser.Title);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+
+                //*[@id="logoutForm"]/div/a
+                // STEP: verify User Name 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify User Name";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.CssSelector("[href*='/Dashboard']"));
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "calico45@calicosol.com", webElement.Text);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+
+                //*[@id="navbarsExample04"]/ul[2]/li[2]/a
+                // STEP: Logout 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Logout";
+                    stepResult = true;
+                    //   action
+                    webElement = browser.FindElement(By.XPath("//*[@id='navbarsExample04']/ul[2]/li[2]/a"));
+                    webElement.Click();
+                    // verify
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS Home Page", browser.Title);
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                stepResult = false;
+                testResult = false;
+                Helper.TakeScreenshot(browser, testId, stepNumber);
+                Helper.TestStepComment(ex.Message);
+                Helper.TestStepResult(stepNumber, stepName, stepResult);
+            }
+
+            // finish up this test case
+            // ------------------------
+            Helper.TestCaseResult(testId, testTitle, testResult);
+            // fail this test case if testResult has been set to FALSE
+            Assert.IsTrue(testResult);
+        }
+
 
 
         [ClassInitialize()]
