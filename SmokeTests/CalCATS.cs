@@ -14,7 +14,7 @@ namespace SmokeTests
         private IWebDriver browser;
         private string appURL;
 
-        static string suiteId = "6";
+        static string suiteId = "7";
         static string suiteTitle = "CalCATS Smoke Tests";
 
         // the following variables are expected to
@@ -26,7 +26,7 @@ namespace SmokeTests
         [TestMethod]
         public void TestLoginPage()
         {
-            testId = "6.1.1";
+            testId = "7.1.1";
             testTitle = "CalCATS Login Page";
 
             int stepNumber = 0;
@@ -256,7 +256,7 @@ namespace SmokeTests
         [TestMethod]
         public void TestDashboard()
         {
-            testId = "6.1.2";
+            testId = "7.1.2";
             testTitle = "CalCATS Dashboard";
 
             int stepNumber = 0;
@@ -394,10 +394,9 @@ namespace SmokeTests
                     webElement = browser.FindElement(By.XPath("//*[@id='navbarsExample04']/ul[2]/li[2]/a"));
                     webElement.Click();
                     // verify
-                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS Home Page", browser.Title);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS Home Page", browser.Title);
                     //   report
-                    Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
                         testResult = false;
