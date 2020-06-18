@@ -346,6 +346,7 @@ namespace SmokeTests
                     //   action
                     webElement = browser.FindElement(By.Id("calico-ajax-login-button"));
                     webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     // verify
                     stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS - Dashboard", browser.Title);
@@ -396,6 +397,7 @@ namespace SmokeTests
                     webElement.Click();
                     webElement = browser.FindElement(By.XPath("//a[@href='javascript:LogOut()']"));
                     webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
                     // verify
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS Home Page", browser.Title);
