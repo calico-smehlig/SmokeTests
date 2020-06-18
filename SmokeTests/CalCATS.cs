@@ -321,9 +321,9 @@ namespace SmokeTests
                     stepResult = true;
                     //   verify
                     webElement = browser.FindElement(By.Id("calico-ajax-userid"));
-                    webElement.SendKeys("calico45@calicosol.com");
+                    webElement.SendKeys("admin@calicosol.com");
                     webElement = browser.FindElement(By.Id("calico-ajax-password"));
-                    webElement.SendKeys("2kegs");
+                    webElement.SendKeys("m@cPhase01");
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -369,8 +369,8 @@ namespace SmokeTests
                     stepName = "Verify User Name";
                     stepResult = true;
                     //   verify
-                    webElement = browser.FindElement(By.CssSelector("[href*='/Dashboard']"));
-                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "calico45@calicosol.com", webElement.Text);
+                    webElement = browser.FindElement(By.Id("userDropdown"));
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "County Admin", webElement.Text);
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
@@ -382,6 +382,7 @@ namespace SmokeTests
 
 
                 //*[@id="navbarsExample04"]/ul[2]/li[2]/a
+                // .XPath("//a[@value='Log Out']")
                 // STEP: Logout 
                 // ---------------------------------------
                 if (!testAbort)
@@ -391,7 +392,9 @@ namespace SmokeTests
                     stepName = "Logout";
                     stepResult = true;
                     //   action
-                    webElement = browser.FindElement(By.XPath("//*[@id='navbarsExample04']/ul[2]/li[2]/a"));
+                    webElement = browser.FindElement(By.Id("userDropdown"));
+                    webElement.Click();
+                    webElement = browser.FindElement(By.XPath("//a[@href='javascript:LogOut()']"));
                     webElement.Click();
                     // verify
                     Helper.TakeScreenshot(browser, testId, stepNumber);
@@ -438,7 +441,7 @@ namespace SmokeTests
         [TestInitialize()]
         public void SetupTest()
         {
-            appURL = "http://calcatsdev.calicosol.com";
+            appURL = "http://calcats.org";
             
             browser = new ChromeDriver();
         }
