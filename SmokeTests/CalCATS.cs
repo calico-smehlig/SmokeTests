@@ -594,6 +594,7 @@ namespace SmokeTests
                     //   verify
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
                         testResult = false;
