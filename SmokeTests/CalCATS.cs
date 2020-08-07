@@ -474,7 +474,8 @@ namespace SmokeTests
                     // action
                     webElement = browser.FindElement(By.Id("loginButton"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
+
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
@@ -507,7 +508,7 @@ namespace SmokeTests
                 }
 
 
-                // STEP: click Login button 
+                // STEP: click Sign In button 
                 // ---------------------------------------
                 if (!testAbort)
                 {
@@ -518,7 +519,7 @@ namespace SmokeTests
                     //   action
                     webElement = browser.FindElement(By.Id("calico-ajax-login-button"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
                     // verify
                     stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS - Dashboard", browser.Title);
                     //   report

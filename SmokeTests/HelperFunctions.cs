@@ -308,5 +308,10 @@ namespace SmokeTests
 
         }
 
+        static public void Wait(int amountSeconds)
+        {
+            System.Threading.Thread.Sleep(amountSeconds * 1000);
+
+        }
     }
 }
