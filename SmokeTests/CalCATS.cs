@@ -113,7 +113,7 @@ namespace SmokeTests
                     // action
                     webElement = browser.FindElement(By.Id("loginButton"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -227,7 +227,7 @@ namespace SmokeTests
                     // //*[@id="calico-ajax-login-modal"]/div/div/div[1]/button
                     webElement = browser.FindElement(By.XPath("//*[@id='calico-ajax-login-modal']/div/div/div[1]/button"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -302,7 +302,7 @@ namespace SmokeTests
                     // action
                     webElement = browser.FindElement(By.Id("loginButton"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -348,7 +348,7 @@ namespace SmokeTests
                     //   action
                     webElement = browser.FindElement(By.Id("calico-ajax-login-button"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     // verify
                     stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS - Dashboard", browser.Title);
@@ -397,7 +397,7 @@ namespace SmokeTests
                     webElement.Click();
                     webElement = browser.FindElement(By.XPath("//a[@href='javascript:LogOut()']"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
                     // verify
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS Home Page", browser.Title);
@@ -563,7 +563,7 @@ namespace SmokeTests
                     // /html/body/div[1]/div[8]/div[2]/button
                     webElement = browser.FindElement(By.XPath("/html/body/div[1]/div[8]/div[2]/button"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
                     //   verify
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     // /html/body/div[1]/div[10]/div/div/div[1]/h4
@@ -590,7 +590,7 @@ namespace SmokeTests
                     // /html/body/div[1]/div[10]/div/div/div[1]/button
                     webElement = browser.FindElement(By.XPath("/html/body/div[1]/div[10]/div/div/div[1]/button"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
                     //   verify
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
@@ -615,7 +615,7 @@ namespace SmokeTests
                     webElement.Click();
                     webElement = browser.FindElement(By.XPath("//a[@href='javascript:LogOut()']"));
                     webElement.Click();
-                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    Helper.Wait(5);
                     // verify
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS Home Page", browser.Title);
