@@ -13,6 +13,8 @@ namespace SmokeTests
     {
         private IWebDriver browser;
         private string appURL;
+        private string appUser;
+        private string appPass;
 
         static string suiteId = "7";
         static string suiteTitle = "CalCATS Smoke Tests";
@@ -317,13 +319,13 @@ namespace SmokeTests
                 {
                     //   prep
                     stepNumber++;
-                    stepName = "Enter User Credentials";
+                    stepName = "Enter User Credentials (" + appUser + ")";
                     stepResult = true;
                     //   verify
                     webElement = browser.FindElement(By.Id("calico-ajax-userid"));
-                    webElement.SendKeys("admin@calicosol.com");
+                    webElement.SendKeys(appUser);
                     webElement = browser.FindElement(By.Id("calico-ajax-password"));
-                    webElement.SendKeys("m@cPhase01");
+                    webElement.SendKeys(appPass);
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     //   report
                     Helper.TestStepResult(stepNumber, stepName, stepResult);
@@ -351,7 +353,6 @@ namespace SmokeTests
                     // verify
                     stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS - Dashboard", browser.Title);
                     //   report
-                    Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
                         testResult = false;
@@ -360,8 +361,7 @@ namespace SmokeTests
                 }
 
 
-                //*[@id="logoutForm"]/div/a
-                // STEP: verify User Name 
+                 // STEP: verify User Name 
                 // ---------------------------------------
                 if (!testAbort)
                 {
@@ -370,10 +370,10 @@ namespace SmokeTests
                     stepName = "Verify User Name";
                     stepResult = true;
                     //   verify
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
                     webElement = browser.FindElement(By.Id("userDropdown"));
                     stepResult = Helper.TestStepCompare(stepNumber, stepName, "County Admin", webElement.Text);
                     //   report
-                    Helper.TestStepResult(stepNumber, stepName, stepResult);
                     if (!stepResult)
                     {
                         testResult = false;
@@ -427,6 +427,222 @@ namespace SmokeTests
             Assert.IsTrue(testResult);
         }
 
+        [TestCategory("CalCATS")]
+        [TestMethod]
+        public void TestNewActivity()
+        {
+            testId = "7.1.3";
+            testTitle = "CalCATS New Activity";
+
+            int stepNumber = 0;
+            string stepName = "";
+            bool stepResult = true;
+
+            bool testResult = true;
+            bool testAbort = false;
+
+            IWebElement webElement;
+
+            try
+            {
+                // STEP: open browser and navigate to login page
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Naviage to " + appURL + " and verify title";
+                    stepResult = true;
+                    //   action
+                    browser.Navigate().GoToUrl(appURL);
+                    //   report
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS Home Page", browser.Title);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = true;
+                    }
+                }
+
+                // STEP: Click Login button 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click Login button";
+                    stepResult = true;
+                    // action
+                    webElement = browser.FindElement(By.Id("loginButton"));
+                    webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+                // STEP: enter User Credentials
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Enter User Credentials (" + appUser + ")";
+                    stepResult = true;
+                    //   verify
+                    webElement = browser.FindElement(By.Id("calico-ajax-userid"));
+                    webElement.SendKeys(appUser);
+                    webElement = browser.FindElement(By.Id("calico-ajax-password"));
+                    webElement.SendKeys(appPass);
+                    //   report
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+
+                // STEP: click Login button 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click 'Sign In' Button";
+                    stepResult = true;
+                    //   action
+                    webElement = browser.FindElement(By.Id("calico-ajax-login-button"));
+                    webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    // verify
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS - Dashboard", browser.Title);
+                    //   report
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+
+                // STEP: verify User Name 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Verify Dashboard";
+                    stepResult = true;
+                    //   verify
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    webElement = browser.FindElement(By.Id("userDropdown"));
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "County Admin", webElement.Text);
+                    //   report
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+                // STEP: click on 'New Activity' button 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Click New Activity";
+                    stepResult = true;
+                    // action
+                    // /html/body/div[1]/div[8]/div[2]/button
+                    webElement = browser.FindElement(By.XPath("/html/body/div[1]/div[8]/div[2]/button"));
+                    webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    //   verify
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    // /html/body/div[1]/div[10]/div/div/div[1]/h4
+                    webElement = browser.FindElement(By.XPath("/html/body/div[1]/div[10]/div/div/div[1]/h4"));
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "New Activity", webElement.Text);
+                    //   report
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+
+                // STEP: dismiss 'New Activity' modal 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Dismiss New Activity Modal";
+                    stepResult = true;
+                    // action
+                    // /html/body/div[1]/div[10]/div/div/div[1]/button
+                    webElement = browser.FindElement(By.XPath("/html/body/div[1]/div[10]/div/div/div[1]/button"));
+                    webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    //   verify
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    //   report
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+                // .XPath("//a[@value='Log Out']")
+                // STEP: Logout 
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Logout";
+                    stepResult = true;
+                    //   action
+                    webElement = browser.FindElement(By.Id("userDropdown"));
+                    webElement.Click();
+                    webElement = browser.FindElement(By.XPath("//a[@href='javascript:LogOut()']"));
+                    webElement.Click();
+                    browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                    // verify
+                    Helper.TakeScreenshot(browser, testId, stepNumber);
+                    stepResult = Helper.TestStepContains(stepNumber, stepName, "CalCATS Home Page", browser.Title);
+                    //   report
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                stepResult = false;
+                testResult = false;
+                Helper.TakeScreenshot(browser, testId, stepNumber);
+                Helper.TestStepComment(ex.Message);
+                Helper.TestStepResult(stepNumber, stepName, stepResult);
+            }
+
+            // finish up this test case
+            // ------------------------
+            Helper.TestCaseResult(testId, testTitle, testResult);
+            // fail this test case if testResult has been set to FALSE
+            Assert.IsTrue(testResult);
+        }
 
 
         [ClassInitialize()]
@@ -444,7 +660,11 @@ namespace SmokeTests
         public void SetupTest()
         {
             appURL = "http://calcats.org";
-            
+            appUser = "admin@calicosol.com";
+            appPass = "m@cPhase01";
+
+
+
             browser = new ChromeDriver();
         }
 
