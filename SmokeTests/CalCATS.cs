@@ -15,6 +15,7 @@ namespace SmokeTests
         private string appURL;
         private string appUser;
         private string appPass;
+        private string appName;
 
         static string suiteId = "7";
         static string suiteTitle = "CalCATS Smoke Tests";
@@ -407,7 +408,7 @@ namespace SmokeTests
                     //   verify
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     webElement = browser.FindElement(By.Id("userDropdown"));
-                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "CaliCo County Admin", webElement.Text);
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, appName, webElement.Text);
                     //   report
                     if (!stepResult)
                     {
@@ -612,7 +613,7 @@ namespace SmokeTests
                     //   verify
                     Helper.TakeScreenshot(browser, testId, stepNumber);
                     webElement = browser.FindElement(By.Id("userDropdown"));
-                    stepResult = Helper.TestStepCompare(stepNumber, stepName, "County Admin", webElement.Text);
+                    stepResult = Helper.TestStepCompare(stepNumber, stepName, appName, webElement.Text);
                     //   report
                     if (!stepResult)
                     {
@@ -734,7 +735,7 @@ namespace SmokeTests
             appURL = "http://calcats.org";
             appUser = "admin@calicosol.com";
             appPass = "m@cPhase01";
-
+            appName = "CaliCo County Admin";
 
 
             browser = new ChromeDriver();
