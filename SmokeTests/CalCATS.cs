@@ -530,6 +530,40 @@ namespace SmokeTests
                     }
                 }
 
+                // STEP: click away 'What's New' if exists
+                // ---------------------------------------
+                if (!testAbort)
+                {
+                    //   prep
+                    stepNumber++;
+                    stepName = "Check for 'Whats New'";
+                    stepResult = true;
+                    //   action
+                    webElement = browser.FindElement(By.Id("calico-message-modal-title"));
+                    if (webElement == null)
+                    {
+                        // What's New does not exist - do nothing
+                        stepName = "Check for 'Whats New' - non-existing.";
+                    }
+                    else
+                    {
+                        // What's New exists - click it away
+                        stepName = "Check for 'Whats New' - existing, clicking away.";
+                        webElement = browser.FindElement(By.Id("calico-error-confirmation-button"));
+                        webElement.Click();
+                    }
+
+                    // verify
+                    Helper.TestStepResult(stepNumber, stepName, stepResult);
+
+                    //   report
+                    if (!stepResult)
+                    {
+                        testResult = false;
+                        testAbort = false;
+                    }
+
+                }
 
                 // STEP: verify User Name 
                 // ---------------------------------------
